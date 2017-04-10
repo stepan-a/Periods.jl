@@ -18,3 +18,9 @@ c = periods(12)
 d = periods(4, [1950 1; 1950 2])
 @assert d.freq==4
 @assert d.time==[1950 1; 1950 2]
+
+# Instantiation from a string
+f = periods("1950Q1")
+
+# Instantiation with non standard literal
+g = p"1950Q1"

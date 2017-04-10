@@ -2,7 +2,7 @@ module Periods
 
 using PeriodsUtils
 
-export periods
+export periods, @periods, @p_str
 
 const ALLOWED_FREQUENCIES = [1, 4, 12]
 
@@ -41,6 +41,24 @@ type periods
         new(freq, time)
     end
 
+    function periods(p::String)
+        @assert isperiod(p)==true
+        p = match(r"([0-9]+)(q|Q|a|A|y|Y|m|M)([0-9]*)", p)
+        freq = freq2int(p.captures[2])
+        time = zeros(Int, 1, 2)
+        if freq==1
+            time[2] = 1
+        else
+            time[2] = parse(Int, String(p.captures[3]))
+        end
+        time[1] = parse(Int, String(p.captures[1]))
+        new(freq, time)
+    end
+
+end
+
+macro p_str(s::String)
+    periods(s)
 end
 
 
