@@ -1,0 +1,10 @@
+language: julia
+julia:
+  - 0.5
+os:
+  - linux
+notifications:
+  email: false
+script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia --check-bounds=yes -e 'Pkg.clone(pwd()); Pkg.test("Periods")'
