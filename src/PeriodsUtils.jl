@@ -2,7 +2,7 @@ module PeriodsUtils
 
 import Base.Char
 
-export ismember, freq2int
+export ismember, freq2int, freq2str
 export isperiod
 
 const FREQENCY_REGEXP = r"m|M|q|Q|a|A|y|Y"
@@ -28,6 +28,18 @@ end
 
 freq2int(f::Char) = freq2int(String([f]))
 freq2int(f::SubString{String}) = freq2int(String(f))
+
+function freq2str(f::Int)
+    if f==4
+        return "Q"
+    end
+    if f==12
+        return "M"
+    end
+    if f==1
+        return "Y"
+    end
+end
 
 isfrequency(f::Char) = ismember(f, Char(ALLOWED_FREQUENCIES_CHAR))
 isfrequency(f::String) = isfrequency(Char(f[1]))

@@ -2,6 +2,8 @@ module Periods
 
 using PeriodsUtils
 
+import Base.String
+
 export periods, @p_str
 
 const ALLOWED_FREQUENCIES = [1, 4, 12]
@@ -74,6 +76,17 @@ macro p_str(s::String)
     periods(s)
 end
 
+"""
+    String(p::periods)
 
+Converts period object to String.
+"""
+function String(p::periods)
+    if p.freq==1
+        return string(string(p.time[1]), "Y")
+    else
+        return string(string(p.time[1]), freq2str(p.freq), string(p.time[2]))
+    end
+end
 
 end
