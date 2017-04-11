@@ -2,7 +2,7 @@ module Periods
 
 using PeriodsUtils
 
-export periods, @periods, @p_str
+export periods, @p_str
 
 const ALLOWED_FREQUENCIES = [1, 4, 12]
 
@@ -73,6 +73,7 @@ Defines non standard literal for periods, of the form r"1990Q1".
 macro p_str(s::String)
     periods(s)
 end
+
 
 
 end
