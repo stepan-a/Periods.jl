@@ -41,6 +41,14 @@ type periods
         new(freq, time)
     end
 
+    """
+        periods(p::String)
+
+    Returns a periods object.
+
+    Input must be a string interpretable as a period (ie of the form 1950Y, 1990Q1,
+    or 1950M11).
+    """
     function periods(p::String)
         @assert isperiod(p)==true
         p = match(r"([0-9]+)(q|Q|a|A|y|Y|m|M)([0-9]*)", p)
@@ -57,6 +65,11 @@ type periods
 
 end
 
+"""
+    p_str(s::String)
+
+Defines non standard literal for periods, of the form r"1990Q1".
+"""
 macro p_str(s::String)
     periods(s)
 end
